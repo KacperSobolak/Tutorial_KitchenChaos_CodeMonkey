@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KitchenObject : MonoBehaviour{
+public class KitchenObject : MonoBehaviour, ISelectedObject{
 
 	[SerializeField] private KitchenObjectSO kitchenObjectSO;
+	[SerializeField] private Collider kitchenObjectCollider;
 
 	private IKitchenObjectParent kitchenObjectParent;
 
@@ -27,9 +28,23 @@ public class KitchenObject : MonoBehaviour{
 
 		transform.parent = kitchenObjectParent.GetKitchenObjectFollowTranform();
 		transform.localPosition = Vector3.zero;
+		kitchenObjectCollider.enabled = false;
+		if (TryGetComponent(out Rigidbody kitchenObjectRigidbody)) {
+			Destroy(kitchenObjectRigidbody);
+		}
 	}	
+
+	public void Interact(Player player) {
+		SetKitchenObjectParent(player);
+	}
 	
 	public IKitchenObjectParent GetKichtenObjectParent() {
 		return kitchenObjectParent;
+	}
+
+	public void ClearKitchenObjectParent() {
+		kitchenObjectParent = null;
+		this.transform.parent = null;
+		kitchenObjectCollider.enabled = true;
 	}
 }
