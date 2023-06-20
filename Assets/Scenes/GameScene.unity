@@ -250,6 +250,37 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 84409639}
   m_SourcePrefab: {fileID: 100100000, guid: 1c5dda3c7cd3cf742afcade5419faeab, type: 3}
+--- !u!1 &272627619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272627620}
+  m_Layer: 0
+  m_Name: KitchenObjectHoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &272627620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272627619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 482674949}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +597,7 @@ MonoBehaviour:
   counterLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  kitchenObjectHoldPoint: {fileID: 0}
 --- !u!4 &482674949
 Transform:
   m_ObjectHideFlags: 0
@@ -579,6 +611,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 84409637}
+  - {fileID: 272627620}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -703,6 +736,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 46, y: 0, z: 0}
+--- !u!114 &1461431589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2102359643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f90cac4d1768714db6d7c967cee19f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1549049044 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6615348726412606287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f90cac4d1768714db6d7c967cee19f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1600131318
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +1013,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+        type: 3}
+      propertyPath: tomatoPrefab
+      value: 
+      objectReference: {fileID: 225001068658482237, guid: a53eedbc8830e8a48827616e807633d3,
+        type: 3}
+    - target: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+        type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 91ae116a98099354cb7ebee97270f3a5,
+        type: 2}
+    - target: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 1549049044}
     - target: {fileID: 6615348725142480796, guid: 770f191dc340c6247b04111d91d1d5c8,
         type: 3}
       propertyPath: m_RootOrder
@@ -1029,6 +1103,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+        type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507341987560341241, guid: 770f191dc340c6247b04111d91d1d5c8,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 1461431589}
     - target: {fileID: 6615348725142480796, guid: 770f191dc340c6247b04111d91d1d5c8,
         type: 3}
       propertyPath: m_RootOrder
