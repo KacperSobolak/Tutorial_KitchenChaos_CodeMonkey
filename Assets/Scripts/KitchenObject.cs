@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KitchenObject : MonoBehaviour, ISelectedObject{
+public class KitchenObject : Interactable{
 
 	[SerializeField] private KitchenObjectSO kitchenObjectSO;
 	[SerializeField] private Collider kitchenObjectCollider;
@@ -34,7 +34,7 @@ public class KitchenObject : MonoBehaviour, ISelectedObject{
 		}
 	}	
 
-	public void Interact(Player player) {
+	public override void Interact(Player player) {
 		SetKitchenObjectParent(player);
 	}
 	

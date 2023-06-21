@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
 	public event EventHandler<OnSelectedObjectChangedEventArgs> OnSelectedCounterChanged;
 	public class OnSelectedObjectChangedEventArgs : EventArgs {
-		public ISelectedObject selectedObject;
+		public Interactable interactable;
 	}
 
 	[SerializeField] private float moveSpeed = 7f;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
 	private bool isWalking;
 	private Vector3 lastInteractDir;
-	private ISelectedObject selectedObject;
+	private Interactable interactable;
 	private KitchenObject kitchenObject;
 
 	private void Awake() {
@@ -35,8 +35,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 	}
 
 	private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
-		if (selectedObject != null) {
-			selectedObject.Interact(this);
+		if (interactable != null) {
+			interactable.Interact(this);
 		}
 		else if (kitchenObject != null) {
 			DropKitchenObject();
@@ -64,19 +64,19 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 		float interactDistance = 2f;
 		float offsetFromGround = 0.1f;
 		if (Physics.Raycast(transform.position + Vector3.up * offsetFromGround, lastInteractDir, out RaycastHit raycastHit, interactDistance, interactableLayerMask)) {
-			if (raycastHit.transform.TryGetComponent(out ISelectedObject selectedObject)) {
-				if (this.selectedObject != selectedObject) {
-					SetSelectedObject(selectedObject);
+			if (raycastHit.transform.TryGetComponent(out Interactable interactable)) {
+				if (this.interactable != interactable) {
+					SetSelectedObject(interactable);
 				}
 			}
 			else {
-				if (selectedObject != null) {
+				if (interactable != null) {
 					SetSelectedObject(null);
 				}
 			}
 		}
 		else {
-			if (selectedObject != null) {
+			if (interactable != null) {
 				SetSelectedObject(null);
 			}
 		}
@@ -115,11 +115,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 		transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
 	}
 
-	private void SetSelectedObject(ISelectedObject selectedObject) {
-		this.selectedObject = selectedObject;
+	private void SetSelectedObject(Interactable selectedObject) {
+		this.interactable = selectedObject;
 
 		OnSelectedCounterChanged?.Invoke(this, new OnSelectedObjectChangedEventArgs {
-			selectedObject = selectedObject
+			interactable = selectedObject
 		});
 	}
 
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
 	public void DropKitchenObject() {
 		kitchenObject.ClearKitchenObjectParent();
-		kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce(transform.forward * dropForce, ForceMode.Force);
+		kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce((transform.forward + transform.up) * dropForce, ForceMode.Force);
 		ClearKitchenObject();
 	}
 }

@@ -202,8 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b185a087f80dc54409df1f8d556f3603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectComponent: {fileID: 623863740515539194}
-  visualGameObject: {fileID: 505332457950329679}
+  interactable: {fileID: 623863740515539194}
+  visualGameObjects:
+  - {fileID: 505332457950329679}
 --- !u!1001 &6862573956157207888
 PrefabInstance:
   m_ObjectHideFlags: 0
