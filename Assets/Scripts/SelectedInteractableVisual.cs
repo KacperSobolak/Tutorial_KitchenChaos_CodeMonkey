@@ -11,6 +11,10 @@ public class SelectedInteractableVisual : MonoBehaviour{
 		Player.Instance.OnSelectedCounterChanged += Player_OnSelectedCounterChanged;
 	}
 
+	private void OnDestroy() {
+		Player.Instance.OnSelectedCounterChanged -= Player_OnSelectedCounterChanged;
+	}
+
 	private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedObjectChangedEventArgs e) {
 		foreach (GameObject visualGameObject in visualGameObjects) {
 			visualGameObject.SetActive(e.interactable == interactable);

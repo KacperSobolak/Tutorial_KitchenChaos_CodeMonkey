@@ -50,4 +50,19 @@ public class KitchenObject : Interactable{
 		this.transform.parent = null;
 		kitchenObjectCollider.enabled = true;
 	}
+
+	public void DestroySelf() {
+		kitchenObjectParent.ClearKitchenObject();
+
+		Destroy(gameObject);
+	}
+
+	public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
+		Transform kitchenObjectTranform = Instantiate(kitchenObjectSO.prefab);
+
+		KitchenObject kitchenObject = kitchenObjectTranform.GetComponent<KitchenObject>();
+		kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
+
+		return kitchenObject;
+	}
 }
