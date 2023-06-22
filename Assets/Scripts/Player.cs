@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 			lastInteractDir = moveDir;
 		}
 
-		float interactDistance = 2f;
+		float interactDistance = 2.5f;
 		float offsetFromGround = 0.1f;
 		if (Physics.Raycast(transform.position + Vector3.up * offsetFromGround, lastInteractDir, out RaycastHit raycastHit, interactDistance, interactableLayerMask)) {
 			if (raycastHit.transform.TryGetComponent(out Interactable interactable)) {
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
 	public void DropKitchenObject() {
 		kitchenObject.ClearKitchenObjectParent();
-		kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce((transform.forward + transform.up) * dropForce, ForceMode.Force);
+		kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce((transform.forward) * dropForce, ForceMode.Force);
 		ClearKitchenObject();
 	}
 }

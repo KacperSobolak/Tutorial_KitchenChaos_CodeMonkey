@@ -28,6 +28,7 @@ public class KitchenObject : Interactable{
 
 		transform.parent = kitchenObjectParent.GetKitchenObjectFollowTranform();
 		transform.localPosition = Vector3.zero;
+		transform.localRotation = Quaternion.identity;
 		kitchenObjectCollider.enabled = false;
 		if (TryGetComponent(out Rigidbody kitchenObjectRigidbody)) {
 			Destroy(kitchenObjectRigidbody);
@@ -35,7 +36,9 @@ public class KitchenObject : Interactable{
 	}	
 
 	public override void Interact(Player player) {
-		SetKitchenObjectParent(player);
+		if (!player.HasKitchenObject()) {
+			SetKitchenObjectParent(player);
+		}
 	}
 	
 	public IKitchenObjectParent GetKichtenObjectParent() {

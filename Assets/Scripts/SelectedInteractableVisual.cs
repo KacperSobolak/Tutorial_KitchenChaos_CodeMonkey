@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectedCounterVisual : MonoBehaviour{
+public class SelectedInteractableVisual : MonoBehaviour{
 
 	[SerializeField] private Interactable interactable;
 	[SerializeField] private GameObject[] visualGameObjects;
