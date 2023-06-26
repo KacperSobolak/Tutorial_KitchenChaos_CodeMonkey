@@ -9,7 +9,7 @@ public class BaseCounter : Interactable, IKitchenObjectParent{
 	private KitchenObject kitchenObject;
 
 	public virtual void InteractAlternate(Player player) {
-		Debug.LogError("Interactable.InteractAlternate();");
+		//Debug.LogError("Interactable.InteractAlternate();");
 	}
 
 	public Transform GetKitchenObjectFollowTranform() {
