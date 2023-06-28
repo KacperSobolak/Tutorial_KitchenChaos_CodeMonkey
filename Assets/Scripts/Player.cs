@@ -7,6 +7,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
 	public static Player Instance { get; private set; }
 
+	public event EventHandler OnPlayerPickup;
+	public event EventHandler OnPlayerDrop;
 	public event EventHandler<OnSelectedObjectChangedEventArgs> OnSelectedCounterChanged;
 	public class OnSelectedObjectChangedEventArgs : EventArgs {
 		public Interactable interactable;
@@ -134,6 +136,10 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
 	public void SetKitchenObject(KitchenObject kitchenObject) {
 		this.kitchenObject = kitchenObject;
+
+		if (kitchenObject != null) {
+			OnPlayerPickup?.Invoke(this, EventArgs.Empty);
+		}
 	}
 
 	public KitchenObject GetKitchenObject() {
@@ -149,6 +155,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 	}
 
 	public void DropKitchenObject() {
+		OnPlayerDrop?.Invoke(this, EventArgs.Empty);
 		kitchenObject.ClearKitchenObjectParent();
 		kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce((transform.forward) * dropForce, ForceMode.Force);
 		ClearKitchenObject();
