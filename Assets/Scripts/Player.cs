@@ -38,12 +38,16 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 	}
 
 	private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
+		if (!GameManager.Instance.IsGamePlaying()) return;
+
 		if (interactable != null && interactable.GetType().IsSubclassOf(typeof(BaseCounter))) {
 			((BaseCounter)interactable).InteractAlternate(this);
 		}
 	}
 
 	private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
+		if (!GameManager.Instance.IsGamePlaying()) return;
+
 		if (interactable != null) {
 			interactable.Interact(this);
 		}
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 	public bool IsWalking() {
 		return isWalking;
 	}
-
+	
 	private void HandleInteractions() {
 		Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 		Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
