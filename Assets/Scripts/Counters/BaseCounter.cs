@@ -7,6 +7,10 @@ public class BaseCounter : Interactable, IKitchenObjectParent{
 
 	public static event EventHandler OnAnyObjectPlaced;
 
+	public static void ResetStaticData() {
+		OnAnyObjectPlaced = null;
+	}
+
 	[SerializeField] private Transform counterTopPoint;
 
 	private KitchenObject kitchenObject;
