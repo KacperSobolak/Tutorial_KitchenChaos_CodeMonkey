@@ -14,7 +14,8 @@ public class GamePauseUI : MonoBehaviour
 			GameManager.Instance.TogglePauseGame();
 		});
 		optionsButton.onClick.AddListener(() => {
-			OptionsUI.Instance.Show();
+			Hide();
+			OptionsUI.Instance.Show(Show);
 		});
 		mainMenuButton.onClick.AddListener(() => {
 			Loader.Load(Loader.Scene.MainMenuScene);

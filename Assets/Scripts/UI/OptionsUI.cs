@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +31,8 @@ public class OptionsUI : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI pauseText;
 	[SerializeField] private Transform pressToRebindKeyTransform;
 
+	private Action onCloseButtonAction;
+
 	private void Awake() {
 		if (Instance != null) {
 			Debug.LogError("More than one OptionsUI is scene");
@@ -43,6 +47,7 @@ public class OptionsUI : MonoBehaviour
 			UpdateVisual();
 		});
 		closeButton.onClick.AddListener(() => {
+			onCloseButtonAction();
 			Hide();
 		});
 
@@ -81,7 +86,9 @@ public class OptionsUI : MonoBehaviour
 		pauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
 	}
 
-	public void Show() {
+	public void Show(Action onCloseButtonAction) {
+		this.onCloseButtonAction = onCloseButtonAction;
+
 		gameObject.SetActive(true);
 	}
 
