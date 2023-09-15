@@ -34,7 +34,15 @@ public class GameManager : MonoBehaviour{
 
 	private void Start() {
 		GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
-		GameInput.Instance.OnInteractAction += GameInput_OnInteractAction; ;
+		GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+		
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+		gamePlayingTimerMax = 300f;
+		countdownToStartTimer = 1f;
+		
+		state = State.CountdownToStart;
+		OnStateChanged?.Invoke(this, EventArgs.Empty);
+#endif
 	}
 
 	private void GameInput_OnInteractAction(object sender, EventArgs e) {
