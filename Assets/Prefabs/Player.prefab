@@ -37,7 +37,7 @@ Transform:
   - {fileID: 8398236093579192261}
   - {fileID: 5743289177031215869}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4874913207140712594
 MonoBehaviour:
@@ -322,8 +322,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerVisual
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5835357917072946613, guid: 1c5dda3c7cd3cf742afcade5419faeab, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
