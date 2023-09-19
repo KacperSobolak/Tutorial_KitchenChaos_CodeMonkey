@@ -6,10 +6,17 @@ using Unity.Netcode;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent {
 
-	// public static Player Instance { get; private set; }
+	public static event EventHandler OnAnyPlayerSpawned;
 
-	public event EventHandler OnPlayerPickup;
-	public event EventHandler OnPlayerDrop;
+	public static event EventHandler OnAnyPickedSomething;
+	public static event EventHandler OnAnyDroppedSomething;
+	
+	public static void ResetStaticData() {
+		OnAnyPlayerSpawned = null;
+		OnAnyPickedSomething = null;
+		OnAnyDroppedSomething = null;
+	}
+	public static Player LocalInstance { get; private set; }
 	public event EventHandler<OnSelectedObjectChangedEventArgs> OnSelectedCounterChanged;
 	public class OnSelectedObjectChangedEventArgs : EventArgs {
 		public Interactable interactable;
@@ -25,13 +32,17 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 	private Interactable interactable;
 	private KitchenObject kitchenObject;
 
-	private void Awake() {
-		// Instance = this;
-	}
-
 	private void Start() {
 		GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
 		GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+	}
+
+	public override void OnNetworkSpawn() {
+		if (IsOwner) {
+			LocalInstance = this;
+		}
+		
+		OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
 	}
 
 	private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
@@ -142,7 +153,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 		this.kitchenObject = kitchenObject;
 
 		if (kitchenObject != null) {
-			OnPlayerPickup?.Invoke(this, EventArgs.Empty);
+			OnAnyPickedSomething?.Invoke(this, EventArgs.Empty);
 		}
 	}
 
@@ -159,7 +170,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 	}
 
 	public void DropKitchenObject() {
-		OnPlayerDrop?.Invoke(this, EventArgs.Empty);
+		OnAnyDroppedSomething?.Invoke(this, EventArgs.Empty);
 		kitchenObject.ClearKitchenObjectParent();
 		kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce((transform.forward) * dropForce, ForceMode.Force);
 		ClearKitchenObject();
