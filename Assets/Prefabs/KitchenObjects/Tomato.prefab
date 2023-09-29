@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 225001068658482237}
   - component: {fileID: 6353824737428096068}
   - component: {fileID: 7175176891066378709}
+  - component: {fileID: 883310081257564263}
   m_Layer: 6
   m_Name: Tomato
   m_TagString: Untagged
@@ -70,6 +71,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.3
   m_Center: {x: 0, y: 0.28, z: 0}
+--- !u!114 &883310081257564263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5199134335624725178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &7023169559351810553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b185a087f80dc54409df1f8d556f3603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 6353824737428096068}
+  interactable: {fileID: 0}
   visualGameObjects:
   - {fileID: 3732642837848407801}
 --- !u!4 &6169158034564632441 stripped

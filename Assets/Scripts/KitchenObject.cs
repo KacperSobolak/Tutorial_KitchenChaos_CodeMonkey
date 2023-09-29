@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class KitchenObject : Interactable{
+public class KitchenObject : NetworkBehaviour{
 
 	[SerializeField] private KitchenObjectSO kitchenObjectSO;
 	[SerializeField] private Collider kitchenObjectCollider;
@@ -26,22 +27,24 @@ public class KitchenObject : Interactable{
 
 		kitchenObjectParent.SetKitchenObject(this);
 
-		transform.parent = kitchenObjectParent.GetKitchenObjectFollowTranform();
-		transform.localPosition = Vector3.zero;
-		transform.localRotation = Quaternion.identity;
-		kitchenObjectCollider.enabled = false;
-		if (TryGetComponent(out Rigidbody kitchenObjectRigidbody)) {
-			Destroy(kitchenObjectRigidbody);
-		}
-	}	
+		// transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
+		// transform.localPosition = Vector3.zero;
 
-	public override void Interact(Player player) {
-		if (!player.HasKitchenObject()) {
-			SetKitchenObjectParent(player);
-		}
-	}
+		// transform.localRotation = Quaternion.identity;
+		// kitchenObjectCollider.enabled = false;
+		// if (TryGetComponent(out Rigidbody kitchenObjectRigidbody)) {
+		// 	Destroy(kitchenObjectRigidbody);
+		// }
+	}	
 	
-	public IKitchenObjectParent GetKichtenObjectParent() {
+	//Get dropped item
+	// public override void Interact(Player player) {
+	// 	if (!player.HasKitchenObject()) {
+	// 		SetKitchenObjectParent(player);
+	// 	}
+	// }
+	
+	public IKitchenObjectParent GetKitchenObjectParent() {
 		return kitchenObjectParent;
 	}
 
@@ -57,13 +60,8 @@ public class KitchenObject : Interactable{
 		Destroy(gameObject);
 	}
 
-	public static KitchenObject SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
-		Transform kitchenObjectTranform = Instantiate(kitchenObjectSO.prefab);
-
-		KitchenObject kitchenObject = kitchenObjectTranform.GetComponent<KitchenObject>();
-		kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
-
-		return kitchenObject;
+	public static void SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
+		KitchenGameMultiplayer.Instance.SpawnKitchenObject(kitchenObjectSO, kitchenObjectParent);
 	}
 
 	public bool TryGetPlate(out PlateKitchenObject plateKitchenObject) {

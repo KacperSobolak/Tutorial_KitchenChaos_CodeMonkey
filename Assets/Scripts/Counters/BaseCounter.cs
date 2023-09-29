@@ -19,7 +19,7 @@ public class BaseCounter : Interactable, IKitchenObjectParent{
 		//Debug.LogError("Interactable.InteractAlternate();");
 	}
 
-	public Transform GetKitchenObjectFollowTranform() {
+	public Transform GetKitchenObjectFollowTransform() {
 		return counterTopPoint;
 	}
 
