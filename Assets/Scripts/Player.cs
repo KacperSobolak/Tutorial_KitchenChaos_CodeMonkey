@@ -5,7 +5,6 @@ using UnityEngine;
 using Unity.Netcode;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent {
-
 	public static event EventHandler OnAnyPlayerSpawned;
 
 	public static event EventHandler OnAnyPickedSomething;
@@ -168,7 +167,11 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 	public bool HasKitchenObject() {
 		return kitchenObject != null;
 	}
-	
+
+	public NetworkObject GetNetworkObject() {
+		return NetworkObject;
+	}
+
 	//Dropping kitchen object
 	// private void DropKitchenObject() {
 	// 	OnAnyDroppedSomething?.Invoke(this, EventArgs.Empty);

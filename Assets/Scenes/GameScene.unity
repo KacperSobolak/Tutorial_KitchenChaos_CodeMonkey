@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1932,7 +1932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692854884adf57506a4708cb5bd5cc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allKitchenObjects: {fileID: 11400000, guid: 2d364fc91f697eb2a8928b0b9c099474, type: 2}
+  kitchenObjectListSO: {fileID: 11400000, guid: 2d364fc91f697eb2a8928b0b9c099474,
+    type: 2}
 --- !u!4 &277691578
 Transform:
   m_ObjectHideFlags: 0
