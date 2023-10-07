@@ -44,6 +44,6 @@ public class BaseCounter : Interactable, IKitchenObjectParent{
 	}
 
 	public NetworkObject GetNetworkObject() {
-		return null;
+		return NetworkObject;
 	}
 }
