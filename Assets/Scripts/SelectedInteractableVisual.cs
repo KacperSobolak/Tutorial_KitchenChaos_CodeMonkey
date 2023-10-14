@@ -28,6 +28,9 @@ public class SelectedInteractableVisual : MonoBehaviour{
 	}
 
 	private void Player_OnSelectedCounterChanged(object sender, Player.OnSelectedObjectChangedEventArgs e) {
+		if (interactable == null)
+			return;
+		
 		foreach (GameObject visualGameObject in visualGameObjects) {
 			if (visualGameObject == null)
 				return;
