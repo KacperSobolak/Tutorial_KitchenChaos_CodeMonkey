@@ -61,9 +61,9 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 		if (interactable != null) {
 			interactable.Interact(this);
 		}
-		// else if (kitchenObject != null) {
-		// 	DropKitchenObject();
-		// }
+		else if (kitchenObject != null) {
+			DropKitchenObject();
+		}
 	}
 
 	private void Update() {
@@ -176,10 +176,9 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 	}
 
 	//Dropping kitchen object
-	// private void DropKitchenObject() {
-	// 	OnAnyDroppedSomething?.Invoke(this, EventArgs.Empty);
-	// 	kitchenObject.ClearKitchenObjectParent();
-	// 	kitchenObject.gameObject.AddComponent<Rigidbody>().AddForce((transform.forward) * dropForce, ForceMode.Force);
-	// 	ClearKitchenObject();
-	// }
+	private void DropKitchenObject() {
+		OnAnyDroppedSomething?.Invoke(this, EventArgs.Empty);
+		kitchenObject.DropKitchenObject(transform.forward * dropForce);
+		KitchenGameMultiplayer.Instance.ClearKitchenObjectOnParent(kitchenObject);
+	}
 }

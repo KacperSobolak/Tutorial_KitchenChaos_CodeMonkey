@@ -9390,7 +9390,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1336936476}
-    PlayerPrefab: {fileID: 2255443823754365006, guid: 6ee527b8d0dc8e1e6a8b6573fa4d081b,
+    PlayerPrefab: {fileID: 6649303254125051302, guid: 6ee527b8d0dc8e1e6a8b6573fa4d081b,
       type: 3}
     Prefabs:
       NetworkPrefabsLists:

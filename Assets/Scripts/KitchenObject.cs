@@ -4,16 +4,18 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class KitchenObject : NetworkBehaviour{
+public class KitchenObject : Interactable{
 
 	[SerializeField] private KitchenObjectSO kitchenObjectSO;
 	[SerializeField] private Collider kitchenObjectCollider;
 
 	private IKitchenObjectParent kitchenObjectParent;
+	private Rigidbody kitchenObjectRigidbody;
 	private FollowTransform followTransform;
 
 	private void Awake() {
 		followTransform = GetComponent<FollowTransform>();
+		kitchenObjectRigidbody = GetComponent<Rigidbody>();
 	}
 
 	public KitchenObjectSO GetKitchenObjectSO() { 
@@ -23,11 +25,9 @@ public class KitchenObject : NetworkBehaviour{
 	public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
 		SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject());
 		
-		// transform.localRotation = Quaternion.identity;
-		// kitchenObjectCollider.enabled = false;
-		// if (TryGetComponent(out Rigidbody kitchenObjectRigidbody)) {
-		// 	Destroy(kitchenObjectRigidbody);
-		// }
+		transform.localRotation = Quaternion.identity;
+		kitchenObjectCollider.enabled = false;
+		kitchenObjectRigidbody.isKinematic = true;
 	}
 
 	[ServerRpc(RequireOwnership = false)]
@@ -55,21 +55,14 @@ public class KitchenObject : NetworkBehaviour{
 		followTransform.SetTargetTransform(IKitchenObjectParent.GetKitchenObjectFollowTransform());
 	}
 	
-	//Get dropped item
-	// public override void Interact(Player player) {
-	// 	if (!player.HasKitchenObject()) {
-	// 		SetKitchenObjectParent(player);
-	// 	}
-	// }
+	 public override void Interact(Player player) {
+	 	if (!player.HasKitchenObject()) {
+	 		SetKitchenObjectParent(player);
+	 	}
+	 }
 	
 	public IKitchenObjectParent GetKitchenObjectParent() {
 		return kitchenObjectParent;
-	}
-
-	public void ClearKitchenObjectParent() {
-		kitchenObjectParent = null;
-		this.transform.parent = null;
-		kitchenObjectCollider.enabled = true;
 	}
 
 	public void DestroySelf() {
@@ -78,6 +71,19 @@ public class KitchenObject : NetworkBehaviour{
 
 	public void ClearKitchenObjectOnParent() {
 		kitchenObjectParent.ClearKitchenObject();
+		followTransform.SetTargetTransform(null);
+		kitchenObjectParent = null;
+		kitchenObjectCollider.enabled = true;
+	}
+
+	public void DropKitchenObject(Vector3 force) {
+		DropKitchenObjectServerRpc(force);
+	}
+
+	[ServerRpc(RequireOwnership = false)]
+	private void DropKitchenObjectServerRpc(Vector3 force) {
+		kitchenObjectRigidbody.isKinematic = false;
+		kitchenObjectRigidbody.AddForce(force, ForceMode.Force);
 	}
 
 	public static void SpawnKitchenObject(KitchenObjectSO kitchenObjectSO, IKitchenObjectParent kitchenObjectParent) {
