@@ -45,6 +45,16 @@ public class Player : NetworkBehaviour, IKitchenObjectParent {
 
 		transform.position = spawnPositionList[(int)OwnerClientId];
 		OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+
+		if (IsServer) {
+			NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+		}
+	}
+
+	private void NetworkManager_OnClientDisconnectCallback(ulong clientId) {
+		if (clientId == OwnerClientId && HasKitchenObject()) {
+			DropKitchenObject();
+		}
 	}
 
 	private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
